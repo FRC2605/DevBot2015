@@ -1,0 +1,36 @@
+#ifndef SHS2605_DEVBOT_H
+#define SHS2605_DEVBOT_H
+
+#include "WPILib.h"
+
+#include "MecanumDrive.h"
+
+class DevBot : public IterativeRobot
+{
+public:
+	
+	DevBot ();
+	~DevBot ();
+	
+	void TeleopInit ();
+	void DisabledInit ();
+	
+	void TeleopPeriodic ();
+	
+private:
+	
+	Talon WheelFL;
+	Talon WheelFR;
+	Talon WheelRL;
+	Talon WheelRR;
+	
+	MecanumDrive Drive;
+	
+	Joystick StrafeStick;
+	Joystick RotateStick;
+	
+};
+
+#define ROBOT_CLASS DevBot
+
+#endif
