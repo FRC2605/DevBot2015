@@ -7,8 +7,8 @@ DevBot :: DevBot ():
 	WheelRL ( 0 ),
 	WheelRR ( 3 ),
 	Drive ( & WheelFL, & WheelFR, & WheelRL, & WheelRR ),
-	StrafeStick ( 0 ),
-	RotateStick ( 1 )
+	LeftStick ( 0 ),
+	RightStick ( 1 )
 {	
 	
 	Drive.SetInverted ( false, true, false, true );
@@ -28,9 +28,8 @@ void DevBot :: TeleopInit ()
 
 void DevBot :: TeleopPeriodic ()
 {
-	
-	Drive.SetTranslation ( StrafeStick.GetX (), - StrafeStick.GetY () );
-	Drive.SetRotation ( RotateStick.GetX () );
+	Drive.SetTranslation ( RightStick.GetX (), - RightStick.GetY () );
+	Drive.SetRotation ( RightStick.GetZ () * 0.6 );
 	
 	Drive.PushTransform ();
 	

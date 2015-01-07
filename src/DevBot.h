@@ -26,8 +26,8 @@ private:
 	
 	MecanumDrive Drive;
 	
-	Joystick StrafeStick;
-	Joystick RotateStick;
+	Joystick LeftStick;
+	Joystick RightStick;
 	
 };
 
