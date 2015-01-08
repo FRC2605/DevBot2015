@@ -1,5 +1,5 @@
 #include "DevBot.h"
-#include "Math.h"
+#include <cmath>
 
 DevBot :: DevBot ():
 	IterativeRobot (),
@@ -29,8 +29,16 @@ void DevBot :: TeleopInit ()
 
 void DevBot :: TeleopPeriodic ()
 {
-	Drive.SetTranslation ( RightStick.GetX (), - RightStick.GetY () );
-	Drive.SetRotation ( RightStick.GetZ () * 0.6 );
+	double x , y , z;
+	x = RightStick.GetX ();
+	y = RightStick.GetY ();
+	z = RightStick.GetZ ();
+
+	ScaleCurve(  x , y);
+	ScaleCurve( z );
+
+	Drive.SetTranslation ( x , - y);
+	Drive.SetRotation ( z * 0.6 );
 	
 	Drive.PushTransform ();
 	
@@ -43,4 +51,17 @@ void DevBot :: DisabledInit ()
 	
 };
 
+void DevBot :: ScaleCurve ( double & x , double & y )
+{
+	double Magnitude , Direction;
+	Magnitude = sqrt ( pow ( x , 2 ) + pow ( y , 2 ) );
+	Direction = atan2 ( x , y);
+	Magnitude = pow ( Magnitude * .01 , 2 );
+	y = sin ( Direction ) * Magnitude;
+	x = cos ( Direction ) * Magnitude;
+}
+
+void DevBot :: ScaleCurve ( double & x ) {
+	x = pow ( x * .01 , 2 );
+}
 START_ROBOT_CLASS ( ROBOT_CLASS );

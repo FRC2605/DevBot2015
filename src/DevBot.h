@@ -16,7 +16,9 @@ public:
 	void DisabledInit ();
 	
 	void TeleopPeriodic ();
-	
+
+	void ScaleCurve ( double & x , double & y );
+	void ScaleCurve ( double & x );
 private:
 	
 	Talon WheelFL;
