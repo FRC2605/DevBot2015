@@ -30,14 +30,14 @@ void DevBot :: TeleopInit ()
 void DevBot :: TeleopPeriodic ()
 {
 	double x , y , z;
-	x = RightStick.GetX ();
-	y = RightStick.GetY ();
-	z = RightStick.GetZ ();
+	x = LeftStick.GetX ();
+	y = LeftStick.GetY ();
+	z = RightStick.GetX ();
 
-	ScaleCurve(  x , y);
-	ScaleCurve( z );
+	//ScaleCurve ( x, y );
+	//ScaleCurve ( z );
 
-	Drive.SetTranslation ( x , - y);
+	Drive.SetTranslation ( x , - y );
 	Drive.SetRotation ( z * 0.6 );
 	
 	Drive.PushTransform ();
@@ -51,6 +51,7 @@ void DevBot :: DisabledInit ()
 	
 };
 
+/*
 void DevBot :: ScaleCurve ( double & x , double & y )
 {
 	double Magnitude , Direction;
@@ -63,5 +64,6 @@ void DevBot :: ScaleCurve ( double & x , double & y )
 
 void DevBot :: ScaleCurve ( double & x ) {
 	x = pow ( x * .01 , 2 );
-}
+}*/
+
 START_ROBOT_CLASS ( ROBOT_CLASS );
