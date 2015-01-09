@@ -3,12 +3,10 @@
 
 MagnitudeCurveFilter :: MagnitudeCurveFilter ()
 {
-
 }
 
 MagnitudeCurveFilter :: ~MagnitudeCurveFilter () 
 {
-
 }
 
 MagnitudeCurveFilter :: void Compute ( double FeedA, double FeedB )

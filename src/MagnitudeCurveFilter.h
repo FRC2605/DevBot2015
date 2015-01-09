@@ -7,6 +7,7 @@
 class MagnitudeCurveFilter : public DSPFilter_2_2
 {
 public:
+
 	MagnitudeCurveFilter();
 	~MagnitudeCurveFilter();
 
@@ -14,9 +15,12 @@ public:
 	double ReadA ();
 	double ReadB ();
 	void Reset ();
+
 private:
+
 	double Magnitude;
 	double Direction;
 	
 };
+
 #endif
