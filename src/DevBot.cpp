@@ -1,5 +1,4 @@
 #include "DevBot.h"
-#include <cmath>
 
 DevBot :: DevBot ():
 	IterativeRobot (),
@@ -50,20 +49,5 @@ void DevBot :: DisabledInit ()
 	Drive.Disable ();
 	
 };
-
-/*
-void DevBot :: ScaleCurve ( double & x , double & y )
-{
-	double Magnitude , Direction;
-	Magnitude = sqrt ( pow ( x , 2 ) + pow ( y , 2 ) );
-	Direction = atan2 ( x , y);
-	Magnitude = pow ( Magnitude * .01 , 2 );
-	y = sin ( Direction ) * Magnitude;
-	x = cos ( Direction ) * Magnitude;
-}
-
-void DevBot :: ScaleCurve ( double & x ) {
-	x = pow ( x * .01 , 2 );
-}*/
 
 START_ROBOT_CLASS ( ROBOT_CLASS );

@@ -3,30 +3,32 @@
 
 MagnitudeCurveFilter :: MagnitudeCurveFilter ()
 {
+	Magnitude = 0;
+	Direction = 0;
 }
 
 MagnitudeCurveFilter :: ~MagnitudeCurveFilter () 
 {
 }
 
-MagnitudeCurveFilter :: void Compute ( double FeedA, double FeedB )
+void MagnitudeCurveFilter :: Compute ( double FeedA, double FeedB )
 {
 	Magnitude = sqrt ( pow ( FeedA, 2 ) + pow ( FeedB, 2 ) );
-	Direction = atan2 ( x, y);
+	Direction = atan2 ( FeedA, FeedB );
 	Magnitude = pow ( Magnitude, 2 );
 }
 
-MagnitudeCurveFilter ::	double ReadA ()
+double MagnitudeCurveFilter :: ReadA ()
 {
 	return Magnitude;
 }
 
-MagnitudeCurveFilter ::	double ReadB ()
+double MagnitudeCurveFilter :: ReadB ()
 {
 	return Direction;
 }
 
-MagnitudeCurveFilter ::	void Reset ()
+void MagnitudeCurveFilter :: Reset ()
 {
 	Magnitude = 0;
 	Direction = 0;
