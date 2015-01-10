@@ -17,9 +17,12 @@ public:
 	
 	void TeleopPeriodic ();
 
+<<<<<<< HEAD
 	void ScaleCurve ( double & x , double & y );
 	void ScaleCurve ( double & x );
 	
+=======
+>>>>>>> FETCH_HEAD
 private:
 	
 	CANJaguar WheelFL;

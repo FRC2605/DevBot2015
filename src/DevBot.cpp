@@ -1,5 +1,4 @@
 #include "DevBot.h"
-#include <cmath>
 
 DevBot :: DevBot ():
 	IterativeRobot (),
