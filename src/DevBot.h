@@ -16,19 +16,16 @@ public:
 	void DisabledInit ();
 	
 	void TeleopPeriodic ();
-
-<<<<<<< HEAD
+	
 	void ScaleCurve ( double & x , double & y );
 	void ScaleCurve ( double & x );
 	
-=======
->>>>>>> FETCH_HEAD
 private:
 	
 	CANJaguar WheelFL;
 	CANJaguar WheelFR;
 	CANJaguar WheelRL;
-	CANJaguar WHeelRR;
+	CANJaguar WheelRR;
 	
 	MecanumDrive Drive;
 	
