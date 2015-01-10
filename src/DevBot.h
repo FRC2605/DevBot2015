@@ -3,7 +3,7 @@
 
 #include "WPILib.h"
 
-#include "MecanumDrive.h"
+#include "Hardware/DriveTrains/MecanumDrive.h"
 
 class DevBot : public IterativeRobot
 {
@@ -19,17 +19,18 @@ public:
 
 	void ScaleCurve ( double & x , double & y );
 	void ScaleCurve ( double & x );
+	
 private:
 	
-	Talon WheelFL;
-	Talon WheelFR;
-	Talon WheelRL;
-	Talon WheelRR;
+	CANJaguar WheelFL;
+	CANJaguar WheelFR;
+	CANJaguar WheelRL;
+	CANJaguar WHeelRR;
 	
 	MecanumDrive Drive;
 	
-	Joystick LeftStick;
-	Joystick RightStick;
+	Joystick StrafeStick;
+	Joystick RotateStick;
 	
 };
 
