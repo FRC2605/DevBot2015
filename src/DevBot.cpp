@@ -2,27 +2,22 @@
 
 DevBot :: DevBot ():
 	IterativeRobot (),
-	WheelFL ( 23 ),
-	WheelFR ( 20 ),
-	WheelRL ( 21 ),
-	WheelRR ( 22 ),
+	WheelFL ( 21 ),
+	WheelFR ( 23 ),
+	WheelRL ( 22 ),
+	WheelRR ( 20 ),
 	Drive ( & WheelFL, & WheelFR, & WheelRL, & WheelRR ),
 	StrafeStick ( 0 ),
 	RotateStick ( 1 )
 {	
 	
-	Drive.SetInverted ( false, true, false, true );
-	Drive.SetMotorScale ( 10 );
+	Drive.SetInverted ( false, true, true, true );
+	Drive.SetMotorScale ( 1000 );
 	
-	/*WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 256, 0.95, 0.01, 0.005 );
-	WheelFR.SetSpeedMode ( CANJaguar :: QuadEncoder, 256, 0.95, 0.01, 0.005 );
-	WheelRL.SetSpeedMode ( CANJaguar :: QuadEncoder, 256, 0.95, 0.01, 0.005 );
-	WheelRR.SetSpeedMode ( CANJaguar :: QuadEncoder, 256, 0.95, 0.01, 0.005 );*/
-	
-	WheelFL.SetVoltageMode ();
-	WheelFR.SetVoltageMode ();
-	WheelRL.SetVoltageMode ();
-	WheelRR.SetVoltageMode ();
+	WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.4, 0.00, 0.00 );
+	WheelFR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.4, 0.00, 0.00 );
+	WheelRL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.4, 0.00, 0.00 );
+	WheelRR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.4, 0.00, 0.00 );
 	
 	WheelFL.Set ( 0 );
 	WheelFR.Set ( 0 );
