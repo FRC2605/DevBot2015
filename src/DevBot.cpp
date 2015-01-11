@@ -13,7 +13,7 @@ DevBot :: DevBot ():
 {	
 	
 	Drive.SetInverted ( false, true, true, true );
-	Drive.SetMotorScale ( 1000 );
+	Drive.SetMotorScale ( 3000 );
 	
 	WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.4, 0.00, 0.00 );
 	WheelFR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.4, 0.00, 0.00 );
@@ -55,21 +55,14 @@ void DevBot :: TeleopPeriodic ()
 
 	Drive.SetTranslation ( StrafeStick.GetX () , - StrafeStick.GetY () );
 	Drive.SetRotation ( RotateStick.GetX () );
-
-	if ( RotateStick.GetRawButton ( 2 ) != 0 && RotateStick.GetRawButton( 3 ) != 0)
-	{}
-	else if ( RotateStick.GetRawButton ( 2 ) == 0 )
-	{
-		Lift.Set ( 1 );
-	}
-	else if ( RotateStick.GetRawButton ( 3 ) == 0 )
-	{
-		Lift.Set ( -1 );
-	}
+	
+	if ( StrafeStick.GetRawButton ( 2 ) != 0 && StrafeStick.GetRawButton ( 3 ) == 0 )
+		Lift.Set ( 1.0 );
+	else if ( StrafeStick.GetRawButton ( 2 ) == 0 && StrafeStick.GetRawButton ( 3 ) != 0 )
+		Lift.Set ( - 1.0 );
 	else
-	{
-		Lift.Set ( 0 );
-	}
+		Lift.Set ( 0.0 );
+	
 	Drive.PushTransform ();
 	
 };
