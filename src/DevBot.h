@@ -31,6 +31,8 @@ private:
 	
 	Joystick StrafeStick;
 	Joystick RotateStick;
+
+	Talon Lift;
 	
 };
 
