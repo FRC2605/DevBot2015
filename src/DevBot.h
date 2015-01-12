@@ -5,6 +5,8 @@
 
 #include "Hardware/DriveTrains/MecanumDrive.h"
 
+#include "MecanumVelocityProfile.h"
+
 class DevBot : public IterativeRobot
 {
 public:
@@ -27,6 +29,8 @@ private:
 	CANJaguar WheelRL;
 	CANJaguar WheelRR;
 	
+	MecanumVelocityProfile VProfile;
+
 	MecanumDrive Drive;
 	
 	Joystick StrafeStick;

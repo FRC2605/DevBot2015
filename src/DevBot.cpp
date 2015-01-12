@@ -6,6 +6,7 @@ DevBot :: DevBot ():
 	WheelFR ( 23 ),
 	WheelRL ( 22 ),
 	WheelRR ( 20 ),
+	VProfile ( 2.0 ),
 	Drive ( & WheelFL, & WheelFR, & WheelRL, & WheelRR ),
 	StrafeStick ( 0 ),
 	RotateStick ( 1 ),
@@ -13,12 +14,13 @@ DevBot :: DevBot ():
 {	
 	
 	Drive.SetInverted ( false, true, true, true );
-	Drive.SetMotorScale ( 3000 );
-	
-	WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.4, 0.00, 0.00 );
-	WheelFR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.4, 0.00, 0.00 );
-	WheelRL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.4, 0.00, 0.00 );
-	WheelRR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.4, 0.00, 0.00 );
+	Drive.SetMotorScale ( 1000 );
+	Drive.AddMagDirFilter ( & VProfile );
+
+	WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
+	WheelFR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
+	WheelRL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
+	WheelRR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
 	
 	WheelFL.Set ( 0 );
 	WheelFR.Set ( 0 );
@@ -56,9 +58,9 @@ void DevBot :: TeleopPeriodic ()
 	Drive.SetTranslation ( StrafeStick.GetX () , - StrafeStick.GetY () );
 	Drive.SetRotation ( RotateStick.GetX () );
 	
-	if ( StrafeStick.GetRawButton ( 2 ) != 0 && StrafeStick.GetRawButton ( 3 ) == 0 )
+	if ( ( StrafeStick.GetRawButton ( 2 ) != 0 ) && ( StrafeStick.GetRawButton ( 3 ) == 0 ) )
 		Lift.Set ( 1.0 );
-	else if ( StrafeStick.GetRawButton ( 2 ) == 0 && StrafeStick.GetRawButton ( 3 ) != 0 )
+	else if ( ( StrafeStick.GetRawButton ( 2 ) == 0 ) && ( StrafeStick.GetRawButton ( 3 ) != 0 ) )
 		Lift.Set ( - 1.0 );
 	else
 		Lift.Set ( 0.0 );
