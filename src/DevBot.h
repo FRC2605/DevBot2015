@@ -1,9 +1,12 @@
 #ifndef SHS2605_DEVBOT_H
 #define SHS2605_DEVBOT_H
 
+#include <Hardware/Drive/MecanumDrive.h>
 #include "WPILib.h"
 
-#include "Hardware/DriveTrains/MecanumDrive.h"
+//#include "DSP/MagnitudeCurveFilter.h"
+
+// Mates of states
 
 #include "MecanumVelocityProfile.h"
 
