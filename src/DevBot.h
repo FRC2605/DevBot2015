@@ -1,14 +1,9 @@
 #ifndef SHS2605_DEVBOT_H
 #define SHS2605_DEVBOT_H
 
-#include <Hardware/Drive/MecanumDrive.h>
 #include "WPILib.h"
 
-//#include "DSP/MagnitudeCurveFilter.h"
-
-// Mates of states
-
-#include "MecanumVelocityProfile.h"
+#include "Hardware/DriveTrains/MecanumDrive.h"
 
 class DevBot : public IterativeRobot
 {
@@ -17,9 +12,11 @@ public:
 	DevBot ();
 	~DevBot ();
 	
+//	void AutonomousInit();
 	void TeleopInit ();
 	void DisabledInit ();
 	
+//	void AutonomousPeriodic();
 	void TeleopPeriodic ();
 	
 	void ScaleCurve ( double & x , double & y );
@@ -32,14 +29,13 @@ private:
 	CANJaguar WheelRL;
 	CANJaguar WheelRR;
 	
-	MecanumVelocityProfile VProfile;
-
 	MecanumDrive Drive;
-	
+
+	Talon TestMotor;
+	Counter TestCounter;
+
 	Joystick StrafeStick;
 	Joystick RotateStick;
-
-	Talon Lift;
 	
 };
 
