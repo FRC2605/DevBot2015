@@ -11,7 +11,7 @@ DevBot :: DevBot ():
 	StrafeStick ( 0 ),
 	RotateStick ( 1 ),
 	Lift ( 0 )
-{	
+	{
 	
 	Drive.SetInverted ( false, true, true, true );
 	Drive.SetMotorScale ( 1000 );
@@ -22,6 +22,7 @@ DevBot :: DevBot ():
 	WheelRL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
 	WheelRR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
 	
+	//WheelFL.SetControlMode ( CANSpeedController :: ControlMode { 1 } );
 	WheelFL.Set ( 0 );
 	WheelFR.Set ( 0 );
 	WheelRL.Set ( 0 );
