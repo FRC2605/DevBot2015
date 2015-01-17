@@ -15,8 +15,8 @@ DevBot :: DevBot ():
 	TestCounter ( 0 ),
 	StrafeStick ( 0 ),
 	RotateStick ( 1 )
-{	
-	
+{
+
 	Drive.SetInverted ( false, true, false, true );
 	Drive.SetMotorScale ( 1000 );
 	

@@ -3,7 +3,11 @@
 
 #include "WPILib.h"
 
-#include "Hardware/DriveTrains/MecanumDrive.h"
+//#include "DSP/MagnitudeCurveFilter.h"
+
+// Mates of states
+
+#include "Hardware/Drive/Filters/MecanumVelocityProfile.h"
 
 class DevBot : public IterativeRobot
 {
@@ -37,6 +41,7 @@ private:
 	Joystick StrafeStick;
 	Joystick RotateStick;
 	
+
 };
 
 #define ROBOT_CLASS DevBot
