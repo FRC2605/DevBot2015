@@ -1,21 +1,24 @@
 #include "DevBot.h"
+#include <cmath>
+
 
 DevBot :: DevBot ():
 	IterativeRobot (),
-	WheelFL ( 21 ),
+	WheelFL ( 22 ),
 	WheelFR ( 23 ),
-	WheelRL ( 22 ),
+	WheelRL ( 21 ),
 	WheelRR ( 20 ),
 	VProfile ( 2.0 ),
 	Drive ( & WheelFL, & WheelFR, & WheelRL, & WheelRR ),
 	StrafeStick ( 0 ),
 	RotateStick ( 1 ),
-	Lift ( 0 )
+	Lift ( 1 )
 	{
 	
-	Drive.SetInverted ( false, true, true, true );
+	Drive.SetInverted ( false, true, false, true );
 	Drive.SetMotorScale ( 1000 );
 	Drive.AddMagDirFilter ( & VProfile );
+
 
 	WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
 	WheelFR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
@@ -55,13 +58,25 @@ void DevBot :: TeleopInit ()
 
 void DevBot :: TeleopPeriodic ()
 {
+	double X, Y, R,BLiftUp,BLiftDown;
+	X = StrafeStick.GetX ();
+	Y = StrafeStick.GetY ();
+	//R = StrafeStick.GetZ ();
+	R = RotateStick.GetX ();
+	BLiftUp = RotateStick.GetRawButton ( 1 );
+	BLiftDown = RotateStick.GetRawButton ( 2 );
 
-	Drive.SetTranslation ( StrafeStick.GetX () , - StrafeStick.GetY () );
-	Drive.SetRotation ( RotateStick.GetX () );
+	ControllerDeadZone ( X );
+	ControllerDeadZone ( Y );
+	ControllerDeadZone ( R );
+
+	Drive.SetTranslation ( X , - Y );
+	Drive.SetRotation ( R );
 	
-	if ( ( StrafeStick.GetRawButton ( 2 ) != 0 ) && ( StrafeStick.GetRawButton ( 3 ) == 0 ) )
+
+	if ( ( BLiftDown != 0 ) && ( BLiftUp == 0 ) )
 		Lift.Set ( 1.0 );
-	else if ( ( StrafeStick.GetRawButton ( 2 ) == 0 ) && ( StrafeStick.GetRawButton ( 3 ) != 0 ) )
+	else if ( ( BLiftDown == 0 ) && ( BLiftUp != 0 ) )
 		Lift.Set ( - 1.0 );
 	else
 		Lift.Set ( 0.0 );
@@ -81,5 +96,11 @@ void DevBot :: DisabledInit ()
 	Drive.Disable ();
 	
 };
+
+void DevBot :: ControllerDeadZone ( double & JoystickInput )
+{
+	if ( std :: abs ( JoystickInput ) <= JOYSTICK_DEADZONE )
+		JoystickInput = 0.0;
+}
 
 START_ROBOT_CLASS ( ROBOT_CLASS );

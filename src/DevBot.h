@@ -4,6 +4,7 @@
 #include <Hardware/Drive/MecanumDrive.h>
 #include "WPILib.h"
 
+#define JOYSTICK_DEADZONE 0.01
 //#include "DSP/MagnitudeCurveFilter.h"
 
 // Mates of states
@@ -22,9 +23,7 @@ public:
 	
 	void TeleopPeriodic ();
 	
-	void ScaleCurve ( double & x , double & y );
-	void ScaleCurve ( double & x );
-	
+	void ControllerDeadZone ( double & JoystickInput );
 private:
 	
 	CANJaguar WheelFL;
