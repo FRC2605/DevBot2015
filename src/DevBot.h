@@ -2,14 +2,13 @@
 #define SHS2605_DEVBOT_H
 
 #include <Hardware/Drive/MecanumDrive.h>
+#include <Hardware/Drive/Filters/MecanumVelocityProfile.h>
 #include "WPILib.h"
 
 #define JOYSTICK_DEADZONE 0.01
 //#include "DSP/MagnitudeCurveFilter.h"
 
 // Mates of states
-
-#include "Hardware/Drive/Filters/MecanumVelocityProfile.h"
 
 class DevBot : public IterativeRobot
 {
