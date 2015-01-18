@@ -4,6 +4,8 @@
 #include <Hardware/Drive/MecanumDrive.h>
 #include <Hardware/Drive/Filters/MecanumVelocityProfile.h>
 #include "WPILib.h"
+#include <cmath>
+#include "SmartJoystick.h"
 
 #define JOYSTICK_DEADZONE 0.01
 //#include "DSP/MagnitudeCurveFilter.h"
@@ -21,8 +23,7 @@ public:
 	void DisabledInit ();
 	
 	void TeleopPeriodic ();
-	
-	void ControllerDeadZone ( double & JoystickInput );
+
 private:
 	
 	CANJaguar WheelFL;
@@ -34,8 +35,8 @@ private:
 
 	MecanumDrive Drive;
 	
-	Joystick StrafeStick;
-	Joystick RotateStick;
+	SmartJoystick StrafeStick;
+	SmartJoystick RotateStick;
 
 	Talon Lift;
 	
