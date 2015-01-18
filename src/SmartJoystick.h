@@ -9,9 +9,9 @@ class SmartJoystick : public Joystick
 public:
 	SmartJoystick ( int JoystickNumber,  double Deadzone = 0.0 );
 
-	float GetXAxis ( bool WithDeadzone = true, double Deadzone = 0.0 );
-	float GetYAxis ( bool WithDeadzone = true, double Deadzone = 0.0 );
-	float GetZAxis ( bool WithDeadzone = true, double Deadzone = 0.0 );
+	double GetXAxis ( bool WithDeadzone = true, double Deadzone = 0.0 );
+	double GetYAxis ( bool WithDeadzone = true, double Deadzone = 0.0 );
+	double GetZAxis ( bool WithDeadzone = true, double Deadzone = 0.0 );
 	bool GetButtonState ( uint32_t ButtonNumber );
 private:
 	double AxisDeadzone;

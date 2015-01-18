@@ -4,7 +4,6 @@
 #include <Hardware/Drive/MecanumDrive.h>
 #include <Hardware/Drive/Filters/MecanumVelocityProfile.h>
 #include "WPILib.h"
-#include <cmath>
 #include "SmartJoystick.h"
 
 #define JOYSTICK_DEADZONE 0.01

@@ -8,7 +8,7 @@ SmartJoystick :: SmartJoystick ( int JoystickNumber, double Deadzone)
 
 }
 
-float SmartJoystick :: GetXAxis ( bool WithDeadzone, double Deadzone)
+double SmartJoystick :: GetXAxis ( bool WithDeadzone, double Deadzone)
 {
 	float X;
 	X = this -> GetX ();
@@ -22,7 +22,7 @@ float SmartJoystick :: GetXAxis ( bool WithDeadzone, double Deadzone)
 	return X;
 }
 
-float SmartJoystick :: GetYAxis ( bool WithDeadzone, double Deadzone)
+double SmartJoystick :: GetYAxis ( bool WithDeadzone, double Deadzone)
 {
 	float Y;
 	Y = this -> GetY ();
@@ -36,7 +36,7 @@ float SmartJoystick :: GetYAxis ( bool WithDeadzone, double Deadzone)
 	return Y;
 }
 
-float SmartJoystick :: GetZAxis ( bool WithDeadzone, double Deadzone)
+double SmartJoystick :: GetZAxis ( bool WithDeadzone, double Deadzone)
 {
 	float Z;
 	Z = this -> GetZ ();
