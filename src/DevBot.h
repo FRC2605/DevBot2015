@@ -35,6 +35,9 @@ private:
 
 	MecanumDrive Drive;
 	
+	Talon TestMotor;
+	Counter TestCounter;
+
 	Joystick StrafeStick;
 	Joystick RotateStick;
 
