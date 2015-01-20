@@ -1,12 +1,11 @@
 #include "SmartJoystick.h"
 #include <cmath>
 
-SmartJoystick :: SmartJoystick ( int JoystickNumber, double Deadzone)
-	: Joystick ( JoystickNumber ),
-	  AxisDeadzone ( Deadzone )
+SmartJoystick :: SmartJoystick ( int JoystickNumber, double Deadzone):
+	Joystick ( JoystickNumber ),
+	AxisDeadzone ( Deadzone )
 {
-
-}
+};
 
 double SmartJoystick :: GetXAxis ( bool WithDeadzone, double Deadzone)
 {
@@ -20,7 +19,7 @@ double SmartJoystick :: GetXAxis ( bool WithDeadzone, double Deadzone)
 		CalcDeadzone ( X , Deadzone);
 	}
 	return X;
-}
+};
 
 double SmartJoystick :: GetYAxis ( bool WithDeadzone, double Deadzone)
 {
@@ -34,7 +33,7 @@ double SmartJoystick :: GetYAxis ( bool WithDeadzone, double Deadzone)
 		CalcDeadzone ( Y , Deadzone);
 	}
 	return Y;
-}
+};
 
 double SmartJoystick :: GetZAxis ( bool WithDeadzone, double Deadzone)
 {
@@ -48,7 +47,7 @@ double SmartJoystick :: GetZAxis ( bool WithDeadzone, double Deadzone)
 		CalcDeadzone ( Z , Deadzone);
 	}
 	return Z;
-}
+};
 
 bool SmartJoystick :: GetButtonState ( uint32_t ButtonNumber )
 {
@@ -59,10 +58,10 @@ bool SmartJoystick :: GetButtonState ( uint32_t ButtonNumber )
 		return true;
 	else
 		return false;
-}
+};
 
 void SmartJoystick :: CalcDeadzone ( float & AxisIn, double & Deadzone )
 {
 	if ( abs ( AxisIn ) <= Deadzone )
 		AxisIn = 0;
-}
+};

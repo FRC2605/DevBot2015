@@ -7,6 +7,7 @@ DevBot :: DevBot ():
 	WheelRL ( 21 ),
 	WheelRR ( 20 ),
 	VProfile ( 2.0 ),
+	RProfile ( 2.0 ),
 	Drive ( & WheelFL, & WheelFR, & WheelRL, & WheelRR ),
 	StrafeStick ( 0, 0.05 ),
 	RotateStick ( 1, 0.05 ),
@@ -16,6 +17,7 @@ DevBot :: DevBot ():
 	Drive.SetInverted ( false, true, false, true );
 	Drive.SetMotorScale ( 1000 );
 	Drive.AddMagDirFilter ( & VProfile );
+	Drive.AddRotationFilter( & RProfile);
 
 
 	WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
@@ -56,9 +58,11 @@ void DevBot :: TeleopInit ()
 void DevBot :: TeleopPeriodic ()
 {
 	bool BLiftUp, BLiftDown;
+
 	//X = StrafeStick.GetXAxis ();
 	//Y = StrafeStick.GetYAxis ();
 	//R = RotateStick.GetXAxis();
+
 	BLiftUp = RotateStick.GetButtonState ( 1 );
 	BLiftDown = RotateStick.GetButtonState ( 2 );
 

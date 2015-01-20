@@ -3,6 +3,7 @@
 
 #include <Hardware/Drive/MecanumDrive.h>
 #include <Hardware/Drive/Filters/MecanumVelocityProfile.h>
+#include <Hardware/Drive/Filters/RotationFilter.h>
 #include "WPILib.h"
 #include "SmartJoystick.h"
 
@@ -31,6 +32,7 @@ private:
 	CANJaguar WheelRR;
 	
 	MecanumVelocityProfile VProfile;
+	RotationFilter RProfile;
 
 	MecanumDrive Drive;
 	
