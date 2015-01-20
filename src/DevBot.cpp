@@ -55,15 +55,15 @@ void DevBot :: TeleopInit ()
 
 void DevBot :: TeleopPeriodic ()
 {
-	double R,BLiftUp,BLiftDown;
+	bool BLiftUp, BLiftDown;
 	//X = StrafeStick.GetXAxis ();
 	//Y = StrafeStick.GetYAxis ();
-	R = RotateStick.GetX ();
+	//R = RotateStick.GetXAxis();
 	BLiftUp = RotateStick.GetButtonState ( 1 );
 	BLiftDown = RotateStick.GetButtonState ( 2 );
 
 	Drive.SetTranslation ( StrafeStick.GetXAxis () , - StrafeStick.GetYAxis() );
-	Drive.SetRotation ( R );
+	Drive.SetRotation ( RotateStick.GetXAxis() );
 	
 
 	if ( BLiftDown && BLiftUp )
