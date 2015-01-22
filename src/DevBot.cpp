@@ -2,12 +2,12 @@
 
 DevBot :: DevBot ():
 	IterativeRobot (),
-	WheelFL ( 22 ),
-	WheelFR ( 23 ),
-	WheelRL ( 21 ),
-	WheelRR ( 20 ),
+	WheelFL ( 41, 10 ),
+	WheelFR ( 43, 10 ),
+	WheelRL ( 40, 10 ),
+	WheelRR ( 42, 10 ),
 	VProfile ( 2.0 ),
-	RProfile ( 2.0 ),
+    RProfile ( 2.0 ),
 	Drive ( & WheelFL, & WheelFR, & WheelRL, & WheelRR ),
 	StrafeStick ( 0, 0.05 ),
 	RotateStick ( 1, 0.05 ),
@@ -15,15 +15,25 @@ DevBot :: DevBot ():
 	{
 	
 	Drive.SetInverted ( false, true, false, true );
-	Drive.SetMotorScale ( 1000 );
+	Drive.SetMotorScale ( 12 );
 	Drive.AddMagDirFilter ( & VProfile );
-	Drive.AddRotationFilter( & RProfile);
+	//Drive.AddRotationFilter( & RProfile);
 
 
-	WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
+	/*WheelFL.SetFeedbackDevice(CANTalon :: QuadEncoder );
+	WheelFR.SetFeedbackDevice(CANTalon :: QuadEncoder );
+	WheelRL.SetFeedbackDevice(CANTalon :: QuadEncoder );
+	WheelRR.SetFeedbackDevice(CANTalon :: QuadEncoder );*/
+
+	WheelFL.SetControlMode (CANSpeedController :: kVoltage);
+	WheelFR.SetControlMode (CANSpeedController :: kVoltage);
+	WheelRL.SetControlMode (CANSpeedController :: kVoltage);
+	WheelRR.SetControlMode (CANSpeedController :: kVoltage);
+
+	/*WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
 	WheelFR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
 	WheelRL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
-	WheelRR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
+	WheelRR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );*/
 	
 	WheelFL.Set ( 0 );
 	WheelFR.Set ( 0 );
@@ -70,9 +80,9 @@ void DevBot :: TeleopPeriodic ()
 	Drive.SetRotation ( RotateStick.GetXAxis() );
 	
 
-	if ( BLiftDown && BLiftUp )
+	if ( BLiftDown && !BLiftUp )
 		Lift.Set ( 1.0 );
-	else if ( BLiftDown && BLiftUp )
+	else if ( !BLiftDown && BLiftUp )
 		Lift.Set ( - 1.0 );
 	else
 		Lift.Set ( 0.0 );
@@ -84,10 +94,10 @@ void DevBot :: TeleopPeriodic ()
 void DevBot :: DisabledInit ()
 {
 	
-	WheelFL.DisableControl ();
-	WheelFR.DisableControl ();
-	WheelRL.DisableControl ();
-	WheelRR.DisableControl ();
+//	WheelFL.DisableControl ();
+//	WheelFR.DisableControl ();
+//	WheelRL.DisableControl ();
+//	WheelRR.DisableControl ();
 	
 	Drive.Disable ();
 	

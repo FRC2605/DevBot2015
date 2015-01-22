@@ -26,10 +26,10 @@ public:
 
 private:
 	
-	CANJaguar WheelFL;
-	CANJaguar WheelFR;
-	CANJaguar WheelRL;
-	CANJaguar WheelRR;
+	CANTalon WheelFL;
+	CANTalon WheelFR;
+	CANTalon WheelRL;
+	CANTalon WheelRR;
 	
 	MecanumVelocityProfile VProfile;
 	RotationFilter RProfile;
