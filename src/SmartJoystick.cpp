@@ -62,6 +62,6 @@ bool SmartJoystick :: GetButtonState ( uint32_t ButtonNumber )
 
 void SmartJoystick :: CalcDeadzone ( float & AxisIn, double & Deadzone )
 {
-	if ( abs ( AxisIn ) <= Deadzone )
+	if ( abs ( AxisIn ) <= ( Deadzone / 100 ) )
 		AxisIn = 0;
 };
