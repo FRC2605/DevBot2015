@@ -16,27 +16,8 @@ DevBot :: DevBot ():
 	{
 	
 	Drive.SetInverted ( false, true, false, true );
-	Drive.SetMotorScale ( 1000 );
+	//Drive.SetMotorScale ( 1000 );
 	Drive.AddMagDirFilter ( & VProfile );
-
-
-	WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
-	WheelFR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
-	WheelRL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
-	WheelRR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
-	
-	//WheelFL.SetControlMode ( CANSpeedController :: ControlMode { 1 } );
-	WheelFL.Set ( 0 );
-	WheelFR.Set ( 0 );
-	WheelRL.Set ( 0 );
-	WheelRR.Set ( 0 );
-	
-	WheelFL.EnableControl ();
-	WheelFR.EnableControl ();
-	WheelRL.EnableControl ();
-	WheelRR.EnableControl ();
-	
-	
 	
 };
 
@@ -48,11 +29,6 @@ void DevBot :: TeleopInit ()
 {
 	
 	Drive.Enable ();
-	
-	WheelFL.EnableControl ();
-	WheelFR.EnableControl ();
-	WheelRL.EnableControl ();
-	WheelRR.EnableControl ();
 	
 };
 
@@ -66,11 +42,7 @@ void DevBot :: TeleopPeriodic ()
 	BLiftUp = RotateStick.GetRawButton ( 1 );
 	BLiftDown = RotateStick.GetRawButton ( 2 );
 
-	ControllerDeadZone ( X );
-	ControllerDeadZone ( Y );
-	ControllerDeadZone ( R );
-
-	Drive.SetTranslation ( X , - Y );
+	Drive.SetTranslation ( StrafeStick.GetXAxis , - StrafeStick.GetYAxis );
 	Drive.SetRotation ( R );
 	
 
@@ -88,19 +60,8 @@ void DevBot :: TeleopPeriodic ()
 void DevBot :: DisabledInit ()
 {
 	
-	WheelFL.DisableControl ();
-	WheelFR.DisableControl ();
-	WheelRL.DisableControl ();
-	WheelRR.DisableControl ();
-	
 	Drive.Disable ();
 	
 };
 
-void DevBot :: ControllerDeadZone ( double & JoystickInput )
-{
-	if ( std :: abs ( JoystickInput ) <= JOYSTICK_DEADZONE )
-		JoystickInput = 0.0;
-}
-
-START_ROBOT_CLASS ( ROBOT_CLASS );
+START_ROBOT_CLASS ( DevBot );
