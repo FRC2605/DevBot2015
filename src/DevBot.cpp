@@ -4,10 +4,10 @@
 
 DevBot :: DevBot ():
 	IterativeRobot (),
-	WheelFL ( 22 ),
-	WheelFR ( 23 ),
-	WheelRL ( 21 ),
-	WheelRR ( 20 ),
+	WheelFL ( 41 ),
+	WheelFR ( 43 ),
+	WheelRL ( 40 ),
+	WheelRR ( 42 ),
 	VProfile ( 2.0 ),
 	Drive ( & WheelFL, & WheelFR, & WheelRL, & WheelRR ),
 	StrafeStick ( 0 ),
@@ -15,9 +15,16 @@ DevBot :: DevBot ():
 	Lift ( 1 )
 	{
 	
-	Drive.SetInverted ( false, true, false, true );
+	//Drive.SetInverted ( false, false, false, false );
+	WheelFL.SetControlMode ( CANTalon :: kPercentVbus);
+	WheelFR.SetControlMode ( CANTalon :: kPercentVbus);
+	WheelRL.SetControlMode ( CANTalon :: kPercentVbus);
+	WheelRR.SetControlMode ( CANTalon :: kPercentVbus);
+
+	Drive.SetInvertedMotor ( RobotDrive :: kFrontLeftMotor, true);
+	Drive.SetInvertedMotor ( RobotDrive :: kRearLeftMotor, true);
 	//Drive.SetMotorScale ( 1000 );
-	Drive.AddMagDirFilter ( & VProfile );
+	//Drive.AddMagDirFilter ( & VProfile );
 	
 };
 
@@ -28,7 +35,7 @@ DevBot :: ~DevBot ()
 void DevBot :: TeleopInit ()
 {
 	
-	Drive.Enable ();
+	//Drive.Enable ();
 	
 };
 
@@ -39,9 +46,9 @@ void DevBot :: TeleopPeriodic ()
 	BLiftUp = RotateStick.GetButtonState ( 1 );
 	BLiftDown = RotateStick.GetButtonState ( 2 );
 
-	Drive.SetTranslation ( StrafeStick.GetXAxis() , - StrafeStick.GetYAxis() );
-	Drive.SetRotation ( RotateStick.GetXAxis() );
-	
+	//Drive.SetTranslation ( StrafeStick.GetX() , - StrafeStick.GetY() );
+	//Drive.SetRotation ( RotateStick.GetX() );
+	Drive.MecanumDrive_Cartesian (StrafeStick.GetX() , - StrafeStick.GetY() , RotateStick.GetX() );
 
 	if ( BLiftDown &&  !BLiftUp )
 		Lift.Set ( 1.0 );
@@ -50,14 +57,14 @@ void DevBot :: TeleopPeriodic ()
 	else
 		Lift.Set ( 0.0 );
 	
-	Drive.PushTransform ();
+	//Drive.PushTransform ();
 	
 };
 
 void DevBot :: DisabledInit ()
 {
 	
-	Drive.Disable ();
+	//Drive.Disable ();
 	
 };
 

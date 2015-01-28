@@ -27,14 +27,14 @@ public:
 	void ControllerDeadZone ( double & JoystickInput );
 private:
 	
-	Talon WheelFL;
-	Talon WheelFR;
-	Talon WheelRL;
-	Talon WheelRR;
+	CANTalon WheelFL;
+	CANTalon WheelFR;
+	CANTalon WheelRL;
+	CANTalon WheelRR;
 	
 	MecanumVelocityProfile VProfile;
 
-	MecanumDrive Drive;
+	RobotDrive Drive;
 	
 	SmartJoystick StrafeStick;
 	SmartJoystick RotateStick;
