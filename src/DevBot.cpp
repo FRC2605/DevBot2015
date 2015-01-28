@@ -9,7 +9,7 @@ DevBot :: DevBot ():
 	WheelRL ( 40 ),
 	WheelRR ( 42 ),
 	VProfile ( 2.0 ),
-	Drive ( & WheelFL, & WheelFR, & WheelRL, & WheelRR ),
+	Drive ( & WheelFL, & WheelRL, & WheelFR, & WheelRR ),
 	StrafeStick ( 0 ),
 	RotateStick ( 1 ),
 	Lift ( 1 )
