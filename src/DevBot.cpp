@@ -48,7 +48,7 @@ void DevBot :: TeleopPeriodic ()
 
 	//Drive.SetTranslation ( StrafeStick.GetX() , - StrafeStick.GetY() );
 	//Drive.SetRotation ( RotateStick.GetX() );
-	Drive.MecanumDrive_Cartesian (StrafeStick.GetX() , - StrafeStick.GetY() , RotateStick.GetX() );
+	Drive.MecanumDrive_Cartesian (   StrafeStick.GetY() , - StrafeStick.GetX() , RotateStick.GetX() );
 
 	if ( BLiftDown &&  !BLiftUp )
 		Lift.Set ( 1.0 );
