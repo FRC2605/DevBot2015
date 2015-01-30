@@ -11,12 +11,12 @@ public:
 	DevBot ();
 	~DevBot ();
 
-	void TestInit ();
-	void TestPeriodic ();
+	void TeleopInit ();
+	void TeleopPeriodic ();
 
-	void DIsabledInit ();
-
+	void DisabledInit ();
 private:
+	Timer updateTimer;
 
 	CANTalon Test;
 
