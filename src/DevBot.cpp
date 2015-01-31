@@ -41,6 +41,14 @@ void DevBot :: TeleopInit ()
 
 void DevBot :: TeleopPeriodic ()
 {
+	Test.Set ( 15000 );
+	OutputToSmartdashboard();
+
+};
+
+void DevBot :: OutputToSmartdashboard()
+{
+
 	int encoderPos = Test.GetEncPosition();
 	int encoderVel = Test.GetEncVel();
 
@@ -52,22 +60,15 @@ void DevBot :: TeleopPeriodic ()
 	int SensorPos = Test.GetPosition();
 	int SensorVel = Test.GetSpeed();
 
-	//SmartDashboard :: PutNumber("Encoder Pos",encoderPos);
+	SmartDashboard :: PutNumber("Encoder Pos",encoderPos);
+	SmartDashboard :: PutNumber("Encoder Vel",encoderVel);
 
-	//if( updateTimer.HasPeriodPassed( 1 ) )
-	//{
-		SmartDashboard :: PutNumber("Encoder Pos",encoderPos);
-		SmartDashboard :: PutNumber("Encoder Vel",encoderVel);
+	SmartDashboard :: PutNumber("Closed Loop Error" , closedLoopError);
 
-		SmartDashboard :: PutNumber("Closed Loop Error" , closedLoopError);
+	SmartDashboard :: PutNumber("Output Voltage", outputV);
 
-		SmartDashboard :: PutNumber("Output Voltage", outputV);
-
-		SmartDashboard :: PutNumber("Selected Sensor Pos", SensorPos );
-		SmartDashboard :: PutNumber ("Selected Sensor Vel", SensorVel);
-	//}
-
-	Test.Set ( 15000 );
+	SmartDashboard :: PutNumber("Selected Sensor Pos", SensorPos );
+	SmartDashboard :: PutNumber ("Selected Sensor Vel", SensorVel);
 
 };
 

@@ -13,7 +13,7 @@ public:
 
 	void TeleopInit ();
 	void TeleopPeriodic ();
-
+	void OutputToSmartdashboard();
 	void DisabledInit ();
 private:
 	Timer updateTimer;
