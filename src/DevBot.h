@@ -3,6 +3,7 @@
 
 #include "WPILib.h"
 
+#define JOYSTICK_DEADZONE 0.01
 //#include "DSP/MagnitudeCurveFilter.h"
 
 // Mates of states
@@ -23,9 +24,7 @@ public:
 //	void AutonomousPeriodic();
 	void TeleopPeriodic ();
 	
-	void ScaleCurve ( double & x , double & y );
-	void ScaleCurve ( double & x );
-	
+	void ControllerDeadZone ( double & JoystickInput );
 private:
 	
 	CANJaguar WheelFL;
@@ -34,7 +33,11 @@ private:
 	CANJaguar WheelRR;
 	
 	MecanumDrive Drive;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 79c729a1db98e846d2872e6c7a2240fd6a95648b
 	Talon TestMotor;
 	Counter TestCounter;
 
