@@ -2,7 +2,9 @@
 #define SHS_ROBOT_H
 
 #include <WPILib.h>
-#include "SmartJoystick.h"
+
+// See IUL for this header
+#include "../Input/SmartJoystick.h"
 
 class DevBot : public IterativeRobot
 {

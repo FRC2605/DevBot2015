@@ -13,8 +13,8 @@ DevBot :: DevBot ():
 
 	Test.SelectProfileSlot ( 0 );
 	Test.SetIzone( 0 );
-	Test.SetPID ( .4 ,0.0 , 7 );
-	Test.SetCloseLoopRampRate(48);
+	Test.SetPID ( .02, .0001, .0025);
+	Test.SetCloseLoopRampRate(12);
 	Test.SetFeedbackDevice ( CANTalon :: QuadEncoder);
 	Test.SetSensorDirection( false );
 	updateTimer.Start();
@@ -41,7 +41,7 @@ void DevBot :: TeleopInit ()
 
 void DevBot :: TeleopPeriodic ()
 {
-	Test.Set ( 15000 );
+	Test.Set ( 70000 );
 	OutputToSmartdashboard();
 
 };
