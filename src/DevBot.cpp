@@ -78,4 +78,4 @@ void DevBot :: DisabledInit()
 	Test.Disable();
 };
 
-START_ROBOT_CLASS ( DevBot )
+START_ROBOT_CLASS ( ROBOT_CLASS )

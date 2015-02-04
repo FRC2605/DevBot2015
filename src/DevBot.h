@@ -26,4 +26,6 @@ private:
 
 };
 
+#define ROBOT_CLASS DevBot
+
 #endif
