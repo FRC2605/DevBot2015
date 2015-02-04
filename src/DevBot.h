@@ -32,8 +32,6 @@ private:
 	CANTalon WheelRL;
 	CANTalon WheelRR;
 	
-	CANJaguarConfiguration WheelConfig;
-	
 	MecanumVelocityProfile VProfile;
 	
 	SerialPort Nav6COM;

@@ -10,7 +10,6 @@ DevBot :: DevBot ():
 	WheelFR ( 43 ),
 	WheelRL ( 41 ),
 	WheelRR ( 42 ),
-	WheelConfig ( CANSpeedController :: kSpeed ),
 	VProfile ( 2.0 ),
 	Nav6COM ( 57600, SerialPort :: kOnboard ),
 	Nav6 ( & Nav6COM, 20 ),
@@ -76,6 +75,7 @@ void DevBot :: TeleopInit ()
 
 void DevBot :: TeleopPeriodic ()
 {
+	
 	double X;
 	double Y;
 	double R;
