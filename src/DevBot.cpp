@@ -16,14 +16,9 @@ DevBot :: DevBot ():
 	{
 	
 	Drive.SetInverted ( false, true, false, true );
-	Drive.SetMotorScale ( 1000 );
+	Drive.SetMotorScale ( 1 );
 	Drive.AddMagDirFilter ( & VProfile );
 
-
-	WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
-	WheelFR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
-	WheelRL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
-	WheelRR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
 	
 	//WheelFL.SetControlMode ( CANSpeedController :: ControlMode { 1 } );
 	WheelFL.Set ( 0 );
@@ -31,10 +26,6 @@ DevBot :: DevBot ():
 	WheelRL.Set ( 0 );
 	WheelRR.Set ( 0 );
 	
-	WheelFL.EnableControl ();
-	WheelFR.EnableControl ();
-	WheelRL.EnableControl ();
-	WheelRR.EnableControl ();
 	
 	
 	
@@ -49,34 +40,22 @@ void DevBot :: TeleopInit ()
 	
 	Drive.Enable ();
 	
-	WheelFL.EnableControl ();
-	WheelFR.EnableControl ();
-	WheelRL.EnableControl ();
-	WheelRR.EnableControl ();
 	
 };
 
 void DevBot :: TeleopPeriodic ()
 {
-	double X, Y, R,BLiftUp,BLiftDown;
-	X = StrafeStick.GetX ();
-	Y = StrafeStick.GetY ();
-	//R = StrafeStick.GetZ ();
-	R = RotateStick.GetX ();
-	BLiftUp = RotateStick.GetRawButton ( 1 );
-	BLiftDown = RotateStick.GetRawButton ( 2 );
+	bool BLiftUp,BLiftDown;
+	BLiftUp = RotateStick.GetButtonState ( 1 );
+	BLiftDown = RotateStick.GetButtonState ( 2 );
 
-	ControllerDeadZone ( X );
-	ControllerDeadZone ( Y );
-	ControllerDeadZone ( R );
-
-	Drive.SetTranslation ( X , - Y );
-	Drive.SetRotation ( R );
+	Drive.SetTranslation ( StrafeStick.GetXAxis() , - StrafeStick.GetYAxis() );
+	Drive.SetRotation ( RotateStick.GetXAxis() );
 	
 
-	if ( ( BLiftDown != 0 ) && ( BLiftUp == 0 ) )
+	if ( !BLiftDown  &&  BLiftUp )
 		Lift.Set ( 1.0 );
-	else if ( ( BLiftDown == 0 ) && ( BLiftUp != 0 ) )
+	else if ( BLiftDown  &&  BLiftUp )
 		Lift.Set ( - 1.0 );
 	else
 		Lift.Set ( 0.0 );
@@ -88,19 +67,9 @@ void DevBot :: TeleopPeriodic ()
 void DevBot :: DisabledInit ()
 {
 	
-	WheelFL.DisableControl ();
-	WheelFR.DisableControl ();
-	WheelRL.DisableControl ();
-	WheelRR.DisableControl ();
-	
 	Drive.Disable ();
 	
 };
 
-void DevBot :: ControllerDeadZone ( double & JoystickInput )
-{
-	if ( std :: abs ( JoystickInput ) <= JOYSTICK_DEADZONE )
-		JoystickInput = 0.0;
-}
 
 START_ROBOT_CLASS ( ROBOT_CLASS );

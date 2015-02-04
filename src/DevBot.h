@@ -3,8 +3,8 @@
 
 #include <Hardware/Drive/MecanumDrive.h>
 #include "WPILib.h"
+#include "../Input/SmartJoystick.h"
 
-#define JOYSTICK_DEADZONE 0.01
 //#include "DSP/MagnitudeCurveFilter.h"
 
 // Mates of states
@@ -23,20 +23,19 @@ public:
 	
 	void TeleopPeriodic ();
 	
-	void ControllerDeadZone ( double & JoystickInput );
 private:
 	
-	CANJaguar WheelFL;
-	CANJaguar WheelFR;
-	CANJaguar WheelRL;
-	CANJaguar WheelRR;
+	CANTalon WheelFL;
+	CANTalon WheelFR;
+	CANTalon WheelRL;
+	CANTalon WheelRR;
 	
 	MecanumVelocityProfile VProfile;
 
 	MecanumDrive Drive;
 	
-	Joystick StrafeStick;
-	Joystick RotateStick;
+	SmartJoystick StrafeStick;
+	SmartJoystick RotateStick;
 
 	Talon Lift;
 	
