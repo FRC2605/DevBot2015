@@ -41,7 +41,7 @@ void DevBot :: TeleopInit ()
 
 void DevBot :: TeleopPeriodic ()
 {
-	Test.Set ( 70000 );
+	Test.Set ( 15000 );
 	OutputToSmartdashboard();
 
 };
