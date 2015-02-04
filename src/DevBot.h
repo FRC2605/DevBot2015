@@ -1,14 +1,16 @@
 #ifndef SHS2605_DEVBOT_H
 #define SHS2605_DEVBOT_H
 
-#include <Hardware/Drive/MecanumDrive.h>
-#include "WPILib.h"
+#include <WPILib.h>
 
-//#include "DSP/MagnitudeCurveFilter.h"
+#include "Hardware/Drive/MecanumDrive.h"
+#include "Hardware/Drive/Filters/MecanumVelocityProfile.h"
+#include "Hardware/Drive/Filters/MecanumMagDirOrientationOffset.h"
 
-// Mates of states
+#include "Sensing/Nav6/IMU.h"
+#include "Sensing/Nav6/Nav6YawAngle.h"
 
-#include "MecanumVelocityProfile.h"
+#include "Hardware/Motors/CANJaguarConfiguration.h"
 
 class DevBot : public IterativeRobot
 {
@@ -21,18 +23,26 @@ public:
 	void DisabledInit ();
 	
 	void TeleopPeriodic ();
+	void DisabledPeriodic ();
 	
 	void ScaleCurve ( double & x , double & y );
 	void ScaleCurve ( double & x );
 	
 private:
 	
-	CANJaguar WheelFL;
-	CANJaguar WheelFR;
-	CANJaguar WheelRL;
-	CANJaguar WheelRR;
+	CANTalon WheelFL;
+	CANTalon WheelFR;
+	CANTalon WheelRL;
+	CANTalon WheelRR;
+	
+	CANJaguarConfiguration WheelConfig;
 	
 	MecanumVelocityProfile VProfile;
+	
+	SerialPort Nav6COM;
+	IMU Nav6;
+	Nav6YawAngle YawReference;
+	MecanumMagDirOrientationOffset FieldOrientation;
 
 	MecanumDrive Drive;
 	

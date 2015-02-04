@@ -1,26 +1,49 @@
 #include "DevBot.h"
 
+#include <iostream>
+
 DevBot :: DevBot ():
 	IterativeRobot (),
-	WheelFL ( 21 ),
-	WheelFR ( 23 ),
-	WheelRL ( 22 ),
-	WheelRR ( 20 ),
+	WheelFL ( 40 ),
+	WheelFR ( 43 ),
+	WheelRL ( 41 ),
+	WheelRR ( 42 ),
+	WheelConfig ( CANSpeedController :: kSpeed ),
 	VProfile ( 2.0 ),
+	Nav6COM ( 57600, SerialPort :: kOnboard ),
+	Nav6 ( & Nav6COM, 20 ),
+	YawReference ( & Nav6 ),
+	FieldOrientation ( & YawReference ),
 	Drive ( & WheelFL, & WheelFR, & WheelRL, & WheelRR ),
 	StrafeStick ( 0 ),
 	RotateStick ( 1 ),
-	Lift ( 0 )
+	Lift ( 1 )
 {	
 	
-	Drive.SetInverted ( false, true, true, true );
-	Drive.SetMotorScale ( 1000 );
+	Drive.SetInverted ( false, true, false, true );
+	Drive.SetMotorScale ( 7000 );
 	Drive.AddMagDirFilter ( & VProfile );
-
-	WheelFL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
-	WheelFR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
-	WheelRL.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
-	WheelRR.SetSpeedMode ( CANJaguar :: QuadEncoder, 1000, 0.65, 0.017, 0.001 );
+	Drive.AddMagDirFilter ( & FieldOrientation );
+	
+	WheelFL.SetControlMode ( CANTalon :: kSpeed );
+	WheelFR.SetControlMode ( CANTalon :: kSpeed );
+	WheelRL.SetControlMode ( CANTalon :: kSpeed );
+	WheelRR.SetControlMode ( CANTalon :: kSpeed );
+	
+	WheelFL.SetFeedbackDevice ( CANTalon :: QuadEncoder );
+	WheelFR.SetFeedbackDevice ( CANTalon :: QuadEncoder );
+	WheelRL.SetFeedbackDevice ( CANTalon :: QuadEncoder );
+	WheelRR.SetFeedbackDevice ( CANTalon :: QuadEncoder );
+	
+	WheelFL.SetSensorDirection ( false );
+	WheelFR.SetSensorDirection ( false );
+	WheelRL.SetSensorDirection ( false );
+	WheelRR.SetSensorDirection ( false );
+	
+	WheelFL.SetPID ( 0.2, 0.0, 0.0 );
+	WheelFR.SetPID ( 0.2, 0.0, 0.0 );
+	WheelRL.SetPID ( 0.2, 0.0, 0.0 );
+	WheelRR.SetPID ( 0.2, 0.0, 0.0 );
 	
 	WheelFL.Set ( 0 );
 	WheelFR.Set ( 0 );
@@ -32,8 +55,6 @@ DevBot :: DevBot ():
 	WheelRL.EnableControl ();
 	WheelRR.EnableControl ();
 	
-	
-	
 };
 
 DevBot :: ~DevBot ()
@@ -43,12 +64,11 @@ DevBot :: ~DevBot ()
 void DevBot :: TeleopInit ()
 {
 	
-	Drive.Enable ();
+	Nav6.ZeroYaw ();
 	
-	WheelFL.EnableControl ();
-	WheelFR.EnableControl ();
-	WheelRL.EnableControl ();
-	WheelRR.EnableControl ();
+	FieldOrientation.CalibrateZero ();
+	
+	Drive.Enable ();
 	
 };
 
@@ -58,26 +78,30 @@ void DevBot :: TeleopPeriodic ()
 	Drive.SetTranslation ( StrafeStick.GetX () , - StrafeStick.GetY () );
 	Drive.SetRotation ( RotateStick.GetX () );
 	
-	if ( ( StrafeStick.GetRawButton ( 2 ) != 0 ) && ( StrafeStick.GetRawButton ( 3 ) == 0 ) )
+	Drive.PushTransform ();
+	
+	if ( ( RotateStick.GetRawButton ( 2 ) != 0 ) && ( RotateStick.GetRawButton ( 3 ) == 0 ) )
 		Lift.Set ( 1.0 );
-	else if ( ( StrafeStick.GetRawButton ( 2 ) == 0 ) && ( StrafeStick.GetRawButton ( 3 ) != 0 ) )
+	else if ( ( RotateStick.GetRawButton ( 2 ) == 0 ) && ( RotateStick.GetRawButton ( 3 ) != 0 ) )
 		Lift.Set ( - 1.0 );
 	else
 		Lift.Set ( 0.0 );
-	
-	Drive.PushTransform ();
 	
 };
 
 void DevBot :: DisabledInit ()
 {
 	
-	WheelFL.DisableControl ();
-	WheelFR.DisableControl ();
-	WheelRL.DisableControl ();
-	WheelRR.DisableControl ();
-	
 	Drive.Disable ();
+	
+	Nav6.Restart ();
+
+};
+
+void DevBot :: DisabledPeriodic ()
+{
+	
+	std :: cout << "Connected: " << ( Nav6.IsConnected () ? "Yes" : "No" ) << ", Yaw: " << Nav6.GetYaw () << "\n";
 	
 };
 
