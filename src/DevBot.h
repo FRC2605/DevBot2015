@@ -5,7 +5,7 @@
 #include "WPILib.h"
 
 // See IUL for this header
-#include "../Input/SmartJoystick.h"
+#include <Input/SmartJoystick.h>
 
 #define JOYSTICK_DEADZONE 0.01
 //#include "DSP/MagnitudeCurveFilter.h"
