@@ -45,17 +45,17 @@ void DevBot :: TeleopInit ()
 
 void DevBot :: TeleopPeriodic ()
 {
-	bool BLiftUp,BLiftDown;
+	bool BLiftUp, BLiftDown;
 	BLiftUp = RotateStick.GetButtonState ( 1 );
 	BLiftDown = RotateStick.GetButtonState ( 2 );
 
-	Drive.SetTranslation ( StrafeStick.GetXAxis() , - StrafeStick.GetYAxis() );
-	Drive.SetRotation ( RotateStick.GetXAxis() );
+	Drive.SetTranslation ( StrafeStick.GetXAxis () , - StrafeStick.GetYAxis () );
+	Drive.SetRotation ( RotateStick.GetXAxis () );
 	
 
-	if ( !BLiftDown  &&  BLiftUp )
+	if ( ! BLiftDown && BLiftUp )
 		Lift.Set ( 1.0 );
-	else if ( BLiftDown  &&  BLiftUp )
+	else if ( BLiftDown && ! BLiftUp )
 		Lift.Set ( - 1.0 );
 	else
 		Lift.Set ( 0.0 );
