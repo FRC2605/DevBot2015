@@ -4,7 +4,7 @@
 #include <WPILib.h>
 
 // See IUL for this header
-#include "../Input/SmartJoystick.h"
+#include <Input/SmartJoystick.h>
 
 class DevBot : public IterativeRobot
 {
