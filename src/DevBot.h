@@ -1,9 +1,12 @@
 #ifndef SHS2605_DEVBOT_H
 #define SHS2605_DEVBOT_H
 
+#include <Input/SmartJoystick.h>
+
 #include <Hardware/Drive/MecanumDrive.h>
 #include "WPILib.h"
-#include "../Input/SmartJoystick.h"
+
+
 
 //#include "DSP/MagnitudeCurveFilter.h"
 
