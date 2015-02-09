@@ -3,12 +3,14 @@
 
 #include <WPILib.h>
 
+#include "Hardware/Motors/CANTalonConfiguration.h"
+
+#include "Hardware/Drive/CANTalonQuadDriveBase.h"
+#include "Hardware/Drive/MecanumDriveTrain.h"
+
 #include "Hardware/Drive/MecanumDrive.h"
 #include "Hardware/Drive/Filters/MecanumVelocityProfile.h"
 #include "Hardware/Drive/Filters/MecanumMagDirOrientationOffset.h"
-
-#include "Sensing/Nav6/IMU.h"
-#include "Sensing/Nav6/Nav6YawAngle.h"
 
 #include "Hardware/Drive/Filters/MecanumVelocityProfile.h"
 
@@ -27,19 +29,17 @@ public:
 	
 private:
 	
-	CANTalon WheelFL;
-	CANTalon WheelFR;
-	CANTalon WheelRL;
-	CANTalon WheelRR;
+	CANTalonConfiguration WheelConfig;
 	
 	MecanumVelocityProfile VProfile;
 	
-	SerialPort Nav6COM;
-	IMU Nav6;
-	Nav6YawAngle YawReference;
-	MecanumMagDirOrientationOffset FieldOrientation;
-
-	MecanumDrive Drive;
+	//SerialPort Nav6COM;
+	//Nav6 Nav;
+	//Nav6YawAngle YawReference;
+	//MecanumMagDirOrientationOffset FieldOrientation;
+	
+	CANTalonQuadDriveBase DriveBase;
+	MecanumDriveTrain DriveTrain;
 	
 	Joystick StrafeStick;
 	Joystick RotateStick;
