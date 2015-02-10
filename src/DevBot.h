@@ -28,10 +28,10 @@ public:
 	
 private:
 	
-	CANTalon WheelFL;
-	CANTalon WheelFR;
-	CANTalon WheelRL;
-	CANTalon WheelRR;
+	Talon WheelFL;
+	Talon WheelFR;
+	Talon WheelRL;
+	Talon WheelRR;
 	
 	MecanumVelocityProfile VProfile;
 

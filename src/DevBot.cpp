@@ -4,15 +4,15 @@
 
 DevBot :: DevBot ():
 	IterativeRobot (),
-	WheelFL ( 22 ),
-	WheelFR ( 23 ),
-	WheelRL ( 21 ),
-	WheelRR ( 20 ),
+	WheelFL ( 2 ),
+	WheelFR ( 1 ),
+	WheelRL ( 3 ),
+	WheelRR ( 4 ),
 	VProfile ( 2.0 ),
 	Drive ( & WheelFL, & WheelFR, & WheelRL, & WheelRR ),
 	StrafeStick ( 0 ),
 	RotateStick ( 1 ),
-	Lift ( 1 )
+	Lift ( 5 )
 	{
 	
 	Drive.SetInverted ( false, true, false, true );
@@ -50,7 +50,7 @@ void DevBot :: TeleopPeriodic ()
 	BLiftDown = RotateStick.GetButtonState ( 2 );
 
 	Drive.SetTranslation ( StrafeStick.GetXAxis () , - StrafeStick.GetYAxis () );
-	Drive.SetRotation ( RotateStick.GetXAxis () );
+	Drive.SetRotation ( StrafeStick.GetXAxis () );
 	
 
 	if ( ! BLiftDown && BLiftUp )
