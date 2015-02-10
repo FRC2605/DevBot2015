@@ -14,6 +14,12 @@
 
 #include "Hardware/Drive/Filters/MecanumVelocityProfile.h"
 
+#include "Hardware/Drive/CANTalonPositionServo.h"
+
+#include "Sensing/DIO/DIOSwitchLimit.h"
+
+#include "LinearSlide.h"
+
 class DevBot : public IterativeRobot
 {
 public:
@@ -23,9 +29,11 @@ public:
 	
 	void TeleopInit ();
 	void DisabledInit ();
+	void TestInit ();
 	
 	void TeleopPeriodic ();
 	void DisabledPeriodic ();
+	void TestPeriodic ();
 	
 private:
 	
@@ -33,19 +41,19 @@ private:
 	
 	MecanumVelocityProfile VProfile;
 	
-	//SerialPort Nav6COM;
-	//Nav6 Nav;
-	//Nav6YawAngle YawReference;
-	//MecanumMagDirOrientationOffset FieldOrientation;
-	
 	CANTalonQuadDriveBase DriveBase;
 	MecanumDriveTrain DriveTrain;
 	
 	Joystick StrafeStick;
 	Joystick RotateStick;
 
-	Talon Lift;
+	CANTalonPositionServo WinchServo;
 	
+	DigitalInput WinchLimitHigh;
+	DigitalInput WinchLimitLow;
+	DIOSwitchLimit WinchLimits;
+	
+	LinearSlide Winch;
 
 };
 

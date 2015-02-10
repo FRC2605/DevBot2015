@@ -16,8 +16,15 @@ DevBot :: DevBot ():
 	DriveTrain ( & DriveBase ),
 	StrafeStick ( 0 ),
 	RotateStick ( 1 ),
-	Lift ( 1 )
-{	
+	WinchServo ( 44, CANTalon :: QuadEncoder, 0 ),
+	WinchLimitHigh ( 1 ),
+	WinchLimitLow ( 0 ),
+	WinchLimits ( & WinchLimitLow, & WinchLimitHigh ),
+	Winch ( & WinchServo, & WinchLimits, 1000.0, 0.0 )
+{
+	
+	WinchServo.SetProfileSlot ( 0 );
+	WinchServo.SetPIDF ( 0.7, 0.0, 0.3, 0.0 );
 	
 	WheelConfig.SetPIDF ( 0.2, 0.0, 0.0, 0.0 );
 	WheelConfig.SetControlSlot ( 0 );
@@ -29,7 +36,6 @@ DevBot :: DevBot ():
 	
 	DriveTrain.SetMotorScale ( 7000 );
 	DriveTrain.AddMagDirFilter ( & VProfile );
-	//DriveTrain.AddMagDirFilter ( & FieldOrientation );
 	
 };
 
@@ -40,11 +46,9 @@ DevBot :: ~DevBot ()
 void DevBot :: TeleopInit ()
 {
 	
-	//Nav6.ZeroYaw ();
-	
-	//FieldOrientation.CalibrateZero ();
-	
 	DriveTrain.Enable ();
+	
+	//Winch.Enable ();
 	
 };
 
@@ -55,27 +59,30 @@ void DevBot :: TeleopPeriodic ()
 	double Y;
 	double R;
 	
-	bool BLiftUp;
-	bool BLiftDown;
-	
 	X = StrafeStick.GetX ();
 	Y = StrafeStick.GetY ();
 	
 	R = RotateStick.GetX ();
-	BLiftUp = RotateStick.GetRawButton ( 1 );
-	BLiftDown = RotateStick.GetRawButton ( 2 );
 
 	DriveTrain.SetTranslation ( X , - Y );
 	DriveTrain.SetRotation ( R );
 	
 	DriveTrain.PushTransform ();
 	
-	if ( BLiftUp && ! BLiftDown )
-		Lift.Set ( 1.0 );
-	else if ( BLiftDown && ! BLiftUp )
-		Lift.Set ( - 1.0 );
-	else
-		Lift.Set ( 0.0 );
+};
+
+void DevBot :: TestInit ()
+{
+	
+	Winch.Enable ();
+	Winch.Home ();
+	
+};
+
+void DevBot :: TestPeriodic ()
+{
+	
+	Winch.Update ();
 	
 };
 
@@ -84,7 +91,7 @@ void DevBot :: DisabledInit ()
 	
 	DriveTrain.Disable ();
 	
-	//Nav6.Restart ();
+	Winch.Disable ();
 
 };
 
