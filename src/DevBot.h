@@ -18,7 +18,13 @@
 
 #include "Sensing/DIO/DIOSwitchLimit.h"
 
+#include "DSInput/JoystickXYInput.h"
+
+#include "Behaviors/BehaviorController.h"
+
 #include "LinearSlide.h"
+
+#include "JoystickMecanumDriveBehavior.h"
 
 class DevBot : public IterativeRobot
 {
@@ -54,6 +60,13 @@ private:
 	DIOSwitchLimit WinchLimits;
 	
 	LinearSlide Winch;
+	
+	JoystickXYInput StrafeInput;
+	JoystickXYInput RotationInput;
+	
+	BehaviorController Behaviors;
+	
+	JoystickMecanumDriveBehavior DriveBehavior;
 
 };
 

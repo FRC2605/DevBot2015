@@ -27,6 +27,9 @@ public:
 	
 	double GetPosition ();
 	
+	double GetHighLimit ();
+	double GetLowLimit ();
+	
 	void Update ();
 	
 	void Disable ();

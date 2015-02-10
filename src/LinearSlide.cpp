@@ -149,6 +149,27 @@ void LinearSlide :: Home ()
 	
 };
 
+bool LinearSlide :: IsHoming ()
+{
+	
+	switch ( State )
+	{
+	
+	case kMode_Velocity:
+	case kMode_Position:
+		
+		return false;
+		
+	default:
+		
+		break;
+		
+	}
+	
+	return TargetReached ( 0.0 );
+	
+};
+
 bool LinearSlide :: TargetReached ( double Tolerance )
 {
 	
@@ -222,6 +243,20 @@ double LinearSlide :: GetPosition ()
 {
 	
 	return Motor -> GetPosition ();
+	
+};
+
+double LinearSlide :: GetHighLimit ()
+{
+	
+	return LowLimit;
+	
+};
+
+double LinearSlide :: GetLowLimit ()
+{
+	
+	return HighLimit;
 	
 };
 
@@ -422,6 +457,10 @@ void LinearSlide :: Update ()
 				Targeter.Set ( MPosition );
 				
 				LowLimit = MPosition;
+				
+				Targeter.SetSpeed ( HomingSpeed );
+				
+				State = kMode_HomeHigh;
 				
 			}
 			
