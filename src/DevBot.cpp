@@ -21,8 +21,8 @@ DevBot :: DevBot ():
 	DriveBehavior ( & DriveTrain, & StrafeInput, & RotationInput )
 {
 	
-	StrafeInput.SetDeadband ( 0.1 );
-	RotationInput.SetDeadband ( 0.1 );
+	StrafeInput.SetDeadband ( 0.09 );
+	RotationInput.SetDeadband ( 0.09 );
 	
 	StrafeInput.SetInversion ( false, true );
 	
@@ -54,6 +54,8 @@ void DevBot :: TeleopInit ()
 {
 	
 	DriveTrain.Enable ();
+	Winch.RunVelocity ( 0.0 );
+	Winch.Enable ();
 	
 	Behaviors.StartBehavior ( JoystickMecanumDriveBehavior :: GetDefaultBehaviorID () );
 	
@@ -63,6 +65,13 @@ void DevBot :: TeleopPeriodic ()
 {
 	
 	Behaviors.Update ();
+	
+	if ( RotateStick.GetRawButton ( 3 ) != 0 )
+		Winch.RunVelocity ( RotateStick.GetY () * 10000.0 );
+	else
+		Winch.RunVelocity ( 0.0 );
+	
+	Winch.Update ();
 	
 };
 
